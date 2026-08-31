@@ -1,159 +1,247 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ledger — Invoice & Receipt Generator</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ledger — Invoice & Receipt Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- LOGIN SCREEN -->
+    <div class="login-screen" id="login-screen">
+      <form class="login-card" id="login-form">
+        <!-- LOGO -->
+        <div class="login-logo">
+          <img src="images/logo.png" alt="Adsphere Logo" />
+        </div>
 
-<!-- LOGIN SCREEN -->
-<div class="login-screen" id="login-screen">
-  <form class="login-card" id="login-form">
-    <div class="brand">
-      <span class="mark">Ledger</span>
-      <span class="tag">admin sign in</span>
-    </div>
-    <div class="status-banner" id="login-error"></div>
-    <div class="field"><label>Email</label><input id="login-email" type="email" autocomplete="username" required></div>
-    <div class="field"><label>Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
-    <button class="btn" type="submit" id="login-submit">Sign in</button>
-    <p class="login-note">Accounts are created by a project admin in the Supabase dashboard — there's no public sign-up.</p>
-  </form>
-</div>
-
-<div class="app" id="app-shell" style="display:none;">
-  <!-- EDITOR -->
-  <div class="editor" id="editor">
-    <div class="signed-in-bar">
-      <span id="signed-in-email"></span>
-      <button id="logout-btn">Sign out</button>
-    </div>
-    <div class="brand">
-      <span class="mark">Ledger</span>
-      <span class="tag">invoice & receipt builder</span>
-    </div>
-
-    <div class="status-banner" id="status-banner"></div>
-
-    <div class="doc-toggle">
-      <button id="tab-invoice" class="active">Invoice</button>
-      <button id="tab-receipt">Receipt</button>
-    </div>
-
-    <div class="section">
-      <h2>YOUR BUSINESS</h2>
-      <div class="field"><label>Business name</label><input id="biz-name" placeholder="Kofi & Co. Trading"></div>
-      <div class="field"><label>Address / contact (one per line)</label><textarea id="biz-meta" placeholder="12 Ring Road, Accra&#10;+233 24 000 0000&#10;hello@kofico.com"></textarea></div>
+        <div class="brand">
+          <span class="mark">Adsphere Ledger</span>
+          <span class="tag">admin sign in</span>
+        </div>
+        <div class="status-banner" id="login-error"></div>
+        <div class="field">
+          <label>Email</label
+          ><input
+            id="login-email"
+            type="email"
+            autocomplete="username"
+            required
+          />
+        </div>
+        <div class="field">
+          <label>Password</label
+          ><input
+            id="login-password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <button class="btn" type="submit" id="login-submit">Sign in</button>
+        <p class="login-note">
+          Accounts are created by a project admin in the Supabase dashboard —
+          there's no public sign-up.
+        </p>
+      </form>
     </div>
 
-    <div class="section">
-      <h2>BILL TO</h2>
-      <div class="field"><label>Client name</label><input id="client-name" placeholder="Ama Owusu"></div>
-      <div class="field"><label>Client address / contact</label><textarea id="client-addr" placeholder="45 Spintex Road, Accra"></textarea></div>
-    </div>
+    <div class="app" id="app-shell" style="display: none">
+      <!-- EDITOR -->
+      <div class="editor" id="editor">
+        <div class="signed-in-bar">
+          <span id="signed-in-email"></span>
+          <button id="logout-btn">Sign out</button>
+        </div>
+        <div class="brand">
+          <span class="mark">Ledger</span>
+          <span class="tag">invoice & receipt builder</span>
+        </div>
 
-    <div class="section">
-      <h2>DOCUMENT DETAILS</h2>
-      <div class="row2">
-        <div class="field"><label id="numlabel">Invoice #</label><input id="doc-number" placeholder="INV-0001"></div>
-        <div class="field"><label id="datelabel">Date issued</label><input id="doc-date" type="date"></div>
-      </div>
-      <div class="row2" id="due-row">
-        <div class="field"><label>Due date</label><input id="due-date" type="date"></div>
-        <div class="field"><label>Currency</label>
-          <select id="currency">
-            <option value="GH₵">GH₵ — Cedi</option>
-            <option value="$">$ — Dollar</option>
-            <option value="€">€ — Euro</option>
-            <option value="£">£ — Pound</option>
-            <option value="₦">₦ — Naira</option>
-          </select>
+        <div class="status-banner" id="status-banner"></div>
+
+        <div class="doc-toggle">
+          <button id="tab-invoice" class="active">Invoice</button>
+          <button id="tab-receipt">Receipt</button>
+        </div>
+
+        <div class="section">
+          <h2>YOUR BUSINESS</h2>
+          <div class="field">
+            <label>Business name</label
+            ><input id="biz-name" placeholder="Kofi & Co. Trading" />
+          </div>
+          <div class="field">
+            <label>Address / contact (one per line)</label
+            ><textarea
+              id="biz-meta"
+              placeholder="12 Ring Road, Accra&#10;+233 24 000 0000&#10;hello@kofico.com"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>BILL TO</h2>
+          <div class="field">
+            <label>Client name</label
+            ><input id="client-name" placeholder="Ama Owusu" />
+          </div>
+          <div class="field">
+            <label>Client address / contact</label
+            ><textarea
+              id="client-addr"
+              placeholder="45 Spintex Road, Accra"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>DOCUMENT DETAILS</h2>
+          <div class="row2">
+            <div class="field">
+              <label id="numlabel">Invoice #</label
+              ><input id="doc-number" placeholder="INV-0001" />
+            </div>
+            <div class="field">
+              <label id="datelabel">Date issued</label
+              ><input id="doc-date" type="date" />
+            </div>
+          </div>
+          <div class="row2" id="due-row">
+            <div class="field">
+              <label>Due date</label><input id="due-date" type="date" />
+            </div>
+            <div class="field">
+              <label>Currency</label>
+              <select id="currency">
+                <option value="GH₵">GH₵ — Cedi</option>
+                <option value="$">$ — Dollar</option>
+                <option value="€">€ — Euro</option>
+                <option value="£">£ — Pound</option>
+                <option value="₦">₦ — Naira</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2" id="paid-row" style="display: none">
+            <div class="field">
+              <label>Payment method</label
+              ><input id="pay-method" placeholder="Mobile money" />
+            </div>
+            <div class="field">
+              <label>Date paid</label><input id="paid-date" type="date" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>LINE ITEMS</h2>
+          <div class="col-labels">
+            <span>Description</span><span>Qty</span><span>Unit price</span
+            ><span></span>
+          </div>
+          <div class="items-editor" id="items-editor"></div>
+          <button class="add-row" id="add-item">+ Add line item</button>
+        </div>
+
+        <div class="section charges">
+          <h2>CHARGES</h2>
+          <div class="row2">
+            <div class="field">
+              <label>Discount (%)</label
+              ><input
+                id="discount-pct"
+                type="number"
+                min="0"
+                step="0.1"
+                value="0"
+              />
+            </div>
+            <div class="field">
+              <label>Tax / VAT (%)</label
+              ><input id="tax-pct" type="number" min="0" step="0.1" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>NOTES</h2>
+          <div class="field">
+            <textarea
+              id="notes"
+              placeholder="Thank you for your business. Payment due within 14 days."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="save-btn">Save to database</button>
+          <button class="btn secondary" id="print-btn">Print / Save PDF</button>
+        </div>
+
+        <div class="section" style="margin-top: 26px">
+          <h2>SAVED DOCUMENTS</h2>
+          <div class="saved-list" id="saved-list">
+            <div class="saved-empty">Loading…</div>
+          </div>
         </div>
       </div>
-      <div class="row2" id="paid-row" style="display:none;">
-        <div class="field"><label>Payment method</label><input id="pay-method" placeholder="Mobile money"></div>
-        <div class="field"><label>Date paid</label><input id="paid-date" type="date"></div>
-      </div>
-    </div>
 
-    <div class="section">
-      <h2>LINE ITEMS</h2>
-      <div class="col-labels">
-        <span>Description</span><span>Qty</span><span>Unit price</span><span></span>
-      </div>
-      <div class="items-editor" id="items-editor"></div>
-      <button class="add-row" id="add-item">+ Add line item</button>
-    </div>
+      <!-- PREVIEW -->
+      <div class="preview-wrap">
+        <div class="sheet" id="sheet">
+          <div class="sheet-head">
+            <div class="sheet-head-left">
+              <img
+                id="p-logo"
+                class="p-logo"
+                src="images/logo.png"
+                alt="Business logo"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="biz-name" id="p-biz-name">Your Business Name</div>
+              <div class="biz-meta" id="p-biz-meta">
+                Address line&#10;Phone / email
+              </div>
+            </div>
+            <div class="doc-id">
+              <div class="kind" id="p-kind">INVOICE</div>
+              <div class="num" id="p-num">INV-0001</div>
+              <div class="date" id="p-dates"></div>
+              <div id="p-paid-stamp"></div>
+            </div>
+          </div>
 
-    <div class="section charges">
-      <h2>CHARGES</h2>
-      <div class="row2">
-        <div class="field"><label>Discount (%)</label><input id="discount-pct" type="number" min="0" step="0.1" value="0"></div>
-        <div class="field"><label>Tax / VAT (%)</label><input id="tax-pct" type="number" min="0" step="0.1" value="0"></div>
-      </div>
-    </div>
+          <div class="bill-to">
+            <div class="label">BILL TO</div>
+            <div class="name" id="p-client-name">Client name</div>
+            <div class="addr" id="p-client-addr"></div>
+          </div>
 
-    <div class="section">
-      <h2>NOTES</h2>
-      <div class="field"><textarea id="notes" placeholder="Thank you for your business. Payment due within 14 days."></textarea></div>
-    </div>
+          <table class="items">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th class="num">Qty</th>
+                <th class="num">Unit price</th>
+                <th class="num">Total</th>
+              </tr>
+            </thead>
+            <tbody id="p-items"></tbody>
+          </table>
 
-    <div class="actions">
-      <button class="btn" id="save-btn">Save to database</button>
-      <button class="btn secondary" id="print-btn">Print / Save PDF</button>
-    </div>
+          <div class="totals" id="p-totals"></div>
 
-    <div class="section" style="margin-top:26px;">
-      <h2>SAVED DOCUMENTS</h2>
-      <div class="saved-list" id="saved-list"><div class="saved-empty">Loading…</div></div>
-    </div>
-  </div>
-
-  <!-- PREVIEW -->
-  <div class="preview-wrap">
-    <div class="sheet" id="sheet">
-      <div class="sheet-head">
-        <div class="sheet-head-left">
-          <img id="p-logo" class="p-logo" src="logo.png" alt="Business logo" onerror="this.style.display='none'">
-          <div class="biz-name" id="p-biz-name">Your Business Name</div>
-          <div class="biz-meta" id="p-biz-meta">Address line&#10;Phone / email</div>
-        </div>
-        <div class="doc-id">
-          <div class="kind" id="p-kind">INVOICE</div>
-          <div class="num" id="p-num">INV-0001</div>
-          <div class="date" id="p-dates"></div>
-          <div id="p-paid-stamp"></div>
+          <div class="notes" id="p-notes-wrap" style="display: none">
+            <div class="label">NOTES</div>
+            <div id="p-notes"></div>
+          </div>
         </div>
       </div>
-
-      <div class="bill-to">
-        <div class="label">BILL TO</div>
-        <div class="name" id="p-client-name">Client name</div>
-        <div class="addr" id="p-client-addr"></div>
-      </div>
-
-      <table class="items">
-        <thead>
-          <tr><th>Description</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total</th></tr>
-        </thead>
-        <tbody id="p-items"></tbody>
-      </table>
-
-      <div class="totals" id="p-totals"></div>
-
-      <div class="notes" id="p-notes-wrap" style="display:none;">
-        <div class="label">NOTES</div>
-        <div id="p-notes"></div>
-      </div>
     </div>
-  </div>
-</div>
 
-<!-- Supabase client (no build step needed) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-<script src="app.js"></script>
-</body>
+    <!-- Supabase client (no build step needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
