@@ -116,6 +116,15 @@ body{
 .btn:hover{ opacity:0.85; }
 .btn:disabled{ opacity:0.5; cursor:default; }
 
+.sheet-head-left{ max-width:70%; }
+.p-logo{
+  display:block;
+  max-width:180px;
+  max-height:64px;
+  object-fit:contain;
+  margin-bottom:10px;
+}
+
 .saved-list{ margin-top:8px; display:flex; flex-direction:column; gap:6px; }
 .saved-item{ display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); font-size:12.5px; }
 .saved-item .links{ display:flex; gap:10px; }
