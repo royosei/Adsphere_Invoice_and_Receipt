@@ -130,10 +130,10 @@ function calcTotals(){
   const taxPct = parseFloat(el('tax-pct').value) || 0;
   const discountAmt = subtotal * (discountPct/100);
   const taxable = subtotal - discountAmt;
-  const taxAmt = taxable * (taxPct/100);
-  const grand = taxable + taxAmt;
-  return { subtotal, discountPct, discountAmt, taxPct, taxAmt, grand };
-}
+ const grand = taxable + taxAmt;
+const deposit = Math.min(parseFloat(el('deposit').value) || 0, grand);
+const balance = grand - deposit;
+return { subtotal, discountPct, discountAmt, taxPct, taxAmt, grand, deposit, balance };
 
 function renderPreview(){
   el('p-biz-name').textContent = el('biz-name').value || 'Your Business Name';
@@ -171,7 +171,13 @@ function renderPreview(){
   if(t.taxPct > 0){
     totalsHtml += `<div class="line muted"><span>Tax / VAT (${t.taxPct}%)</span><span class="val">+${fmtMoney(t.taxAmt)}</span></div>`;
   }
+  if(t.deposit > 0){
+  totalsHtml += `<div class="line"><span>Total</span><span class="val">${fmtMoney(t.grand)}</span></div>`;
+  totalsHtml += `<div class="line muted"><span>Initial deposit</span><span class="val">−${fmtMoney(t.deposit)}</span></div>`;
+  totalsHtml += `<div class="line grand"><span>${docType === 'invoice' ? 'Balance due' : 'Balance remaining'}</span><span class="val">${fmtMoney(t.balance)}</span></div>`;
+} else {
   totalsHtml += `<div class="line grand"><span>${docType === 'invoice' ? 'Amount due' : 'Total paid'}</span><span class="val">${fmtMoney(t.grand)}</span></div>`;
+}
   el('p-totals').innerHTML = totalsHtml;
 
   if(docType === 'receipt'){
@@ -205,9 +211,10 @@ function setDocType(type){
 }
 
 ['biz-name','biz-meta','client-name','client-addr','doc-number','doc-date','due-date',
- 'currency','pay-method','paid-date','discount-pct','tax-pct','notes'].forEach(id => {
+ 'currency','pay-method','paid-date','discount-pct','tax-pct','deposit','notes'].forEach(id => {'currency','pay-method','paid-date','discount-pct','tax-pct','deposit','notes'].forEach(id => {
   el(id).addEventListener('input', renderPreview);
-  el(id).addEventListener('change', renderPreview);
+   el(id).addEventListener('change', renderPreview);
+   
 });
 
 el('tab-invoice').addEventListener('click', () => setDocType('invoice'));
@@ -236,6 +243,7 @@ function collectRow(){
     paid_date: el('paid-date').value || null,
     discount_pct: parseFloat(el('discount-pct').value) || 0,
     tax_pct: parseFloat(el('tax-pct').value) || 0,
+    deposit: parseFloat(el('deposit').value) || 0,
     notes: el('notes').value,
     items: items
   };
@@ -256,6 +264,7 @@ function applyRow(row){
   el('paid-date').value = row.paid_date || '';
   el('discount-pct').value = row.discount_pct || 0;
   el('tax-pct').value = row.tax_pct || 0;
+  el('deposit').value = row.deposit || 0;
   el('notes').value = row.notes || '';
   renderItemsEditor();
   setDocType(docType);
