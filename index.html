@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adsphere — Invoice & Receipt </title>
+    <title>Adsphere — Invoice & Receipt</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="print.css" media="print" />
   </head>
   <body>
     <!-- LOGIN SCREEN -->
@@ -143,43 +144,36 @@
           <button class="add-row" id="add-item">+ Add line item</button>
         </div>
 
-   <div class="section charges">
-  <h2>CHARGES</h2>
-  <div class="row2">
-    <div class="field">
-      <label>Discount (%)</label
-      ><input
-        id="discount-pct"
-        type="number"
-        min="0"
-        step="0.1"
-        value="0"
-      />
-    </div>
-    <div class="field">
-      <label>Tax / VAT (%)</label
-      ><input id="tax-pct" type="number" min="0" step="0.1" value="0" />
-    </div>
-  </div>
-  <div class="field">
-    <label>Initial deposit (amount already paid)</label>
-    <input
-      id="deposit"
-      type="number"
-      min="0"
-      step="0.01"
-      value="0"
-      style="text-align: right"
-    />
-  </div>
-
+        <div class="section charges">
+          <h2>CHARGES</h2>
+          <div class="row2">
+            <div class="field">
+              <label>Discount (%)</label
+              ><input
+                id="discount-pct"
+                type="number"
+                min="0"
+                step="0.1"
+                value="0"
+              />
+            </div>
+            <div class="field">
               <label>Tax / VAT (%)</label
               ><input id="tax-pct" type="number" min="0" step="0.1" value="0" />
             </div>
           </div>
+          <div class="field">
+            <label>Initial deposit (amount already paid)</label>
+            <input
+              id="deposit"
+              type="number"
+              min="0"
+              step="0.01"
+              value="0"
+              style="text-align: right"
+            />
+          </div>
         </div>
-        <div class="account-details">
-</div>
 
         <div class="section">
           <h2>NOTES</h2>
@@ -247,25 +241,28 @@
             <tbody id="p-items"></tbody>
           </table>
 
-         <div class="totals" id="p-totals"></div>
+          <div class="totals" id="p-totals"></div>
 
-<div class="account-details">
-  <div class="label">ACCOUNT DETAILS</div>
-  <div>
-    <strong>Mobile Money</strong><br />
-    Merchant ID: 397366<br />
-    Phone number: 055 981 1414<br />
-    Name: Adsphere or Richmond Osei Yeboah<br />
-    <br />
-    <strong>Bank</strong><br />
-    Bank: Stanbic Bank<br />
-    Account Name: Adsphere<br />
-    Account Number: 9040013039059<br />
-    Branch / Sort Code: Accra Main
-  </div>
-</div>
+          <div class="account-details">
+            <div class="label">ACCOUNT DETAILS</div>
+            <div>
+              <strong>Mobile Money</strong><br />
+              Merchant ID: 397366<br />
+              Phone number: 055 981 1414<br />
+              Name: Adsphere or Richmond Osei Yeboah<br />
+              <br />
+              <strong>Bank</strong><br />
+              Bank: Stanbic Bank<br />
+              Account Name: Adsphere<br />
+              Account Number: 9040013039059<br />
+              Branch / Sort Code: Accra Main
+            </div>
+          </div>
 
-<div class="notes" id="p-notes-wrap" style="display: none">
+          <div class="notes" id="p-notes-wrap" style="display: none">
+            <div class="label">NOTES</div>
+            <div id="p-notes"></div>
+          </div>
         </div>
       </div>
     </div>
