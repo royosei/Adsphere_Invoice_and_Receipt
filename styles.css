@@ -523,25 +523,48 @@ table.items tbody td.num {
   margin-bottom: 6px;
 }
 
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
 @media print {
+  html,
   body {
+    height: auto;
+    margin: 0;
     background: white;
   }
+  .login-screen {
+    display: none !important;
+  }
   .editor {
-    display: none;
+    display: none !important;
+  }
+  .app {
+    display: block;
+    min-height: 0;
+    height: auto;
   }
   .preview-wrap {
+    display: block;
     padding: 0;
+    overflow: visible;
   }
   .sheet {
     box-shadow: none;
     max-width: 100%;
+    margin: 0;
     padding: 0;
   }
-  .app {
-    display: block;
+  .totals,
+  .account-details,
+  .notes,
+  table.items tr {
+    break-inside: avoid;
   }
 }
+
 .login-logo {
   display: flex;
   justify-content: center;
@@ -553,4 +576,19 @@ table.items tbody td.num {
   width: 180px;
   height: 180px;
   object-fit: contain;
+
+  .sheet-head {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+  .bill-to {
+    margin-bottom: 16px;
+  }
+  .totals {
+    margin-bottom: 16px;
+  }
+  .account-details {
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
 }
