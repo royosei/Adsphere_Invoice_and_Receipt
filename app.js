@@ -177,6 +177,7 @@ function calcTotals() {
 }
 
 function renderPreview() {
+  el("p-account-details").style.display = docType === "invoice" ? "" : "none";
   el("p-biz-name").textContent = el("biz-name").value || "Your Business Name";
   el("p-biz-meta").innerHTML = escapeHtml(
     el("biz-meta").value || "Address line\nPhone / email",
